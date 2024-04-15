@@ -5,14 +5,15 @@ section .text
 _start:
 	mov ecx,[factorialBase]; designate number to take the factorial of as counter index
 	mov eax,[factorialBase]; designate eax as the iterative value of the factorial
-	loop iterate; begin calculation
+	loop iterate; decrement index and begin calculation
 
 iterate:
 	imul eax,ecx; multiply current value of factorial by current index
 	loop iterate; decrement index and loop, exits when index = 0
 
-	mov [factorialValue],eax; store calculated value of factorial in uninitialize variable
+	mov [factorialValue],eax; store calculated value of factorial in uninitialized variable
 	jmp exit; terminate program
+
 exit:
 	mov eax,1
 	int 0x80
