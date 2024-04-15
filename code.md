@@ -11,15 +11,16 @@ iterate:
 	imul eax,ecx; multiply current value of factorial by current index
 	loop iterate; decrement index and loop, exits when index = 0
 
-	mov [factorialValue],eax; store calculated value of factorial in uninitialized variable
-	jmp exit; terminate program
+	jmp exit; save result and terminate program
 
 exit:
+	mov [factorialValue],eax; store calculated value of factorial in uninitialized variable
+
 	mov eax,1
 	int 0x80
 
 section .data
-	factorialBase dd 6; numerical value to calculate the factorial of
+	factorialBase dd 12; numerical value to calculate the factorial of (max supported value of 12 due to 32 bit register overflow)
 
 segment .bss
 	factorialValue resb 4; result of the factorial calculation will be stored in this uninitialized variable
